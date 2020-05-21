@@ -8,7 +8,7 @@ class App extends Component {
       return (
       <div>
           <Title title={'How\'s the weather?'} />
-          <TilesList tiles={'abc'}/>
+          <TilesList/>
       </div>
       )
   }
