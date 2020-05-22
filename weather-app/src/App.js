@@ -1,10 +1,10 @@
 import React from "react";
 import Title from "./components/Title";
 import CityFounder from "./components/CityFounder";
-import Weather from "./components/Weather";
+// import Weather from "./components/Weather";
 import TilesList from "./components/TilesList";
-import WeatherIcon from "./components/WeatherIcon";
-import AddTile from "./components/AddTile";
+// import WeatherIcon from "./components/WeatherIcon";
+// import AddTile from "./components/AddTile";
 
 const API_KEY = "747e8bc063feec4c6efe3893a9f561db";
 
@@ -92,8 +92,12 @@ class App extends React.Component {
           <Title title="How's The Weather?"/>
         </div>
         <div>
+          <TilesList tiles = {this.state.tiles}
+            onTileRemoved={this.removeTile}/>
+        </div>
+        <div>
           <CityFounder getWeather={this.getWeather} />
-            <Weather
+            {/* <Weather
               temperature={this.state.temperature} 
               humidity={this.state.humidity}
               city={this.state.city}
@@ -101,11 +105,7 @@ class App extends React.Component {
               description={this.state.description}
               error={this.state.error}
               icon={this.state.icon}
-            />
-        </div>
-        <div>
-          <TilesList tiles = {this.state.tiles}
-            onTileRemoved={this.removeTile}/>
+            /> */}
         </div>
       </div>
     );

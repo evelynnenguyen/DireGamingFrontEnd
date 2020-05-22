@@ -32,16 +32,16 @@ function Tile(props){
                 <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                     <Typography gutterBottom variant="subtitle1">
-                    {tile.city}, {tile.country}
+                        Location: {tile.city}, {tile.country}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                    {tile.temperature}
+                        Temperature: {tile.temperature}{'\u00b0'}C
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                    {tile.humidity}
+                        Humidity: {tile.humidity}%
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                    {tile.description}
+                        {tile.description}
                     </Typography>
                 </Grid>
                 <Grid item>
