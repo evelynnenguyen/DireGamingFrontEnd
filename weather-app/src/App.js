@@ -1,23 +1,74 @@
-import React, { Component } from 'react';
-import './App.css';
-import Title from './components/Title';
-import TilesList from './components/TilesList';
+import React from "react";
 
-class App extends Component {
-  componentDidMount(){
-    fetch("https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=439d4b804bc8187953eb36d2a8c26a02")
-    .then(response => response.json())
-    .then(jsondata => console.log(jsondata))
+import Titles from "./components/Titles";
+import Form from "./components/Form";
+import Weather from "./components/Weather";
+
+const API_KEY = "747e8bc063feec4c6efe3893a9f561db";
+
+class App extends React.Component {
+  state = {
+    temperature: undefined,
+    city: undefined,
+    country: undefined,
+    humidity: undefined,
+    description: undefined,
+    error: undefined
   }
-
+  getWeather = async (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
+    const data = await api_call.json();
+    if (city) {
+      this.setState({
+        temperature: data.main.temp,
+        city: data.name,
+        country: data.sys.country,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+        error: ""
+      });
+    } else {
+      this.setState({
+        temperature: undefined,
+        city: undefined,
+        country: undefined,
+        humidity: undefined,
+        description: undefined,
+        error: "Please choose a city"
+      });
+    }
+  }
   render() {
-      return (
+    return (
       <div>
-          <Title title={'How\'s the weather?'} />
-          {/* <TilesList/> */}
+        <div className="wrapper">
+          <div className="main">
+            <div className="container">
+              <div className="row">
+                <div className="col-xs-5 title-container">
+                  <Titles />
+                </div>
+                <div className="col-xs-7 form-container">
+                  <Form getWeather={this.getWeather} />
+                  <Weather 
+                    temperature={this.state.temperature} 
+                    humidity={this.state.humidity}
+                    city={this.state.city}
+                    country={this.state.country}
+                    description={this.state.description}
+                    error={this.state.error}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      )
+    );
   }
-}
+};
 
 export default App;
