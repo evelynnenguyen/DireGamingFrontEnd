@@ -1,7 +1,8 @@
 import React from "react";
 import Title from "./components/Title";
-import Tile from "./components/Tile";
+import CityFounder from "./components/CityFounder";
 import Weather from "./components/Weather";
+import WeatherIcon from "./components/WeatherIcon";
 
 const API_KEY = "747e8bc063feec4c6efe3893a9f561db";
 
@@ -12,6 +13,7 @@ class App extends React.Component {
     country: undefined,
     humidity: undefined,
     description: undefined,
+    icon: undefined,
     error: undefined
   }
   getWeather = async (e) => {
@@ -26,6 +28,7 @@ class App extends React.Component {
         country: data.sys.country,
         humidity: data.main.humidity,
         description: data.weather[0].description,
+        icon: data.weather[0].icon,
         error: ""
       });
     } else {
@@ -35,10 +38,14 @@ class App extends React.Component {
         country: undefined,
         humidity: undefined,
         description: undefined,
+        icon: undefined,
         error: "Please choose a city"
       });
     }
+    console.log(this.state.icon);
+    console.log('http://openweathermap.org/img/wn/'+ this.state.icon +'@2x.png');
   }
+
   render() {
     return (
       <div>
@@ -50,7 +57,7 @@ class App extends React.Component {
                   <Title title="How's The Weather?"/>
                 </div>
                 <div className="col-xs-7 form-container">
-                  <Tile getWeather={this.getWeather} />
+                  <CityFounder getWeather={this.getWeather} />
                   <Weather 
                     temperature={this.state.temperature} 
                     humidity={this.state.humidity}
@@ -58,7 +65,9 @@ class App extends React.Component {
                     country={this.state.country}
                     description={this.state.description}
                     error={this.state.error}
+                    icon={this.state.icon}
                   />
+                  {/* <WeatherIcon icon={this.state.icon}/> */}
                 </div>
               </div>
             </div>
