@@ -1,7 +1,6 @@
 import React from "react";
-
-import Titles from "./components/Titles";
-import Form from "./components/Form";
+import Title from "./components/Title";
+import Tile from "./components/Tile";
 import Weather from "./components/Weather";
 
 const API_KEY = "747e8bc063feec4c6efe3893a9f561db";
@@ -18,8 +17,7 @@ class App extends React.Component {
   getWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
     const data = await api_call.json();
     if (city) {
       this.setState({
@@ -49,10 +47,10 @@ class App extends React.Component {
             <div className="container">
               <div className="row">
                 <div className="col-xs-5 title-container">
-                  <Titles />
+                  <Title title="How's The Weather?"/>
                 </div>
                 <div className="col-xs-7 form-container">
-                  <Form getWeather={this.getWeather} />
+                  <Tile getWeather={this.getWeather} />
                   <Weather 
                     temperature={this.state.temperature} 
                     humidity={this.state.humidity}
