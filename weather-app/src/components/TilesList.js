@@ -1,38 +1,25 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import React from 'react';
+import Tile from './Tile';
+import PropTypes from 'prop-types';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
-
-export default function TilesList() {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={3}>
-                    <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                    <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                    <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                    <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-            </Grid>
+function TilesList (props){
+    return(
+        <div>
+            <div className="tileGrid">
+            {props.tiles
+                .sort(function(x,y){
+                    return y.id - x.id;
+                })
+                .map((tile, index) => <Tile key={index}
+                    tile={tile}
+                    onTileRemoved={props.onTileRemoved} />)}
+            </div>
         </div>
-);
+    );
 }
+
+TilesList.propTypes = {
+    tiles: PropTypes.array.isRequired,
+    onTileRemoved: PropTypes.func.isRequired
+}
+export default TilesList;
