@@ -14,12 +14,13 @@ function Tile(props){
             <Grid container spacing={2}>
             <Grid item>
                 <ButtonBase>
-                <img className="weather_icon" scr={'http://openweathermap.org/img/wn/'+ tile.icon +'@2x.png'} alt="weather icon"/>
+                <img className="weather_icon" src={'http://openweathermap.org/img/wn/'+ tile.icon +'@2x.png'} alt="weather icon"/>
+                {/* <img className="weather_icon" src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"/> */}
                 </ButtonBase>
             </Grid>
             <Grid item container>
                 <Grid item xs container direction="column" spacing={2}>
-                <Grid item>
+                <Grid className="inner">
                     <Typography gutterBottom variant="subtitle1">
                         Location: {tile.city}, {tile.country}
                     </Typography>
