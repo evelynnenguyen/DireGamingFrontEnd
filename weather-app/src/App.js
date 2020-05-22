@@ -26,9 +26,23 @@ class App extends React.Component {
   getWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-    const data = await api_call.json();
-    if (city) {
+    // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    // const data = await api_call.json();
+    var flag = true;
+
+    const data = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+      .then(response => {
+        if(response.ok){
+          return response.json()
+        }
+        else {
+          flag = false;
+          throw new Error('City not found');
+        }
+      })
+      .catch(error => console.log('error is', error));
+
+    if (city && flag) {
       this.setState({
         cityId: data.id,
         temperature: data.main.temp,
@@ -54,7 +68,7 @@ class App extends React.Component {
       console.log(this.state.tiles);
 
     } else {
-      alert("Please choose a city");
+      alert("City not found, please choose another city");
     }
     console.log(this.state.icon);
     console.log('http://openweathermap.org/img/wn/'+ this.state.icon +'@2x.png');
@@ -80,11 +94,11 @@ class App extends React.Component {
           <Title title="How's The Weather?"/>
         </div>
         <div>
-          <TilesList tiles = {this.state.tiles}
-            onTileRemoved={this.removeTile}/>
+          <CityFounder getWeather={this.getWeather} />
         </div>
         <div>
-          <CityFounder getWeather={this.getWeather} />
+          <TilesList tiles = {this.state.tiles}
+            onTileRemoved={this.removeTile}/>
         </div>
       </div>
     );

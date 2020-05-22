@@ -9,7 +9,7 @@ function Tile(props){
 
     const tile = props.tile;
     return(
-        <Paper>
+        <Paper className="tile">
             <Grid container spacing={2}>
             <Grid item>
                 <ButtonBase>
