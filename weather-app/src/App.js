@@ -91,10 +91,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="title">
           <Title title="How's The Weather?"/>
         </div>
-        <div>
+        <div className="cityFounder">
           <CityFounder getWeather={this.getWeather} />
         </div>
         <br/>
