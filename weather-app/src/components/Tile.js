@@ -9,16 +9,17 @@ function Tile(props){
 
     const tile = props.tile;
     return(
-        <Paper className="tile">
+    <figure className="tile">
+        <Paper className="paper">
             <Grid container spacing={2}>
             <Grid item>
                 <ButtonBase>
                 <img className="weather_icon" scr={'http://openweathermap.org/img/wn/'+ tile.icon +'@2x.png'} alt="weather icon"/>
                 </ButtonBase>
             </Grid>
-            <Grid item xs={12} sm container>
+            <Grid item container>
                 <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
+                <Grid item>
                     <Typography gutterBottom variant="subtitle1">
                         Location: {tile.city}, {tile.country}
                     </Typography>
@@ -43,7 +44,7 @@ function Tile(props){
             </Grid>
             </Grid>
         </Paper>
-
+    </figure>
     );
 }
 

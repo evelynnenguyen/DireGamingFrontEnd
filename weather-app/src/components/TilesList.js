@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 
 function TilesList (props){
     return(
-        <div>
-            <div className="tileGrid">
+        <div className="tileGrid">
             {props.tiles
                 .sort(function(x,y){
                     return y.id - x.id;
@@ -13,8 +12,8 @@ function TilesList (props){
                 .map((tile, index) => <Tile key={index}
                     tile={tile}
                     onTileRemoved={props.onTileRemoved} />)}
-            </div>
         </div>
+
     );
 }
 

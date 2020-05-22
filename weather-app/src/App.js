@@ -2,6 +2,7 @@ import React from "react";
 import Title from "./components/Title";
 import CityFounder from "./components/CityFounder";
 import TilesList from "./components/TilesList";
+import "./App.css";
 
 const API_KEY = "747e8bc063feec4c6efe3893a9f561db";
 
@@ -96,9 +97,12 @@ class App extends React.Component {
         <div>
           <CityFounder getWeather={this.getWeather} />
         </div>
-        <div>
-          <TilesList tiles = {this.state.tiles}
+        <br/>
+        <div className="flexbox-container">
+          <div className="row">
+            <TilesList tiles = {this.state.tiles}
             onTileRemoved={this.removeTile}/>
+          </div>
         </div>
       </div>
     );
