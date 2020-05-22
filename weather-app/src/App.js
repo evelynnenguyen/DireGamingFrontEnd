@@ -1,10 +1,7 @@
 import React from "react";
 import Title from "./components/Title";
 import CityFounder from "./components/CityFounder";
-// import Weather from "./components/Weather";
 import TilesList from "./components/TilesList";
-// import WeatherIcon from "./components/WeatherIcon";
-// import AddTile from "./components/AddTile";
 
 const API_KEY = "747e8bc063feec4c6efe3893a9f561db";
 
@@ -57,16 +54,7 @@ class App extends React.Component {
       console.log(this.state.tiles);
 
     } else {
-      this.setState({
-        cityId: undefined,
-        temperature: undefined,
-        city: undefined,
-        country: undefined,
-        humidity: undefined,
-        description: undefined,
-        icon: undefined,
-        error: "Please choose a city"
-      });
+      alert("Please choose a city");
     }
     console.log(this.state.icon);
     console.log('http://openweathermap.org/img/wn/'+ this.state.icon +'@2x.png');
@@ -97,15 +85,6 @@ class App extends React.Component {
         </div>
         <div>
           <CityFounder getWeather={this.getWeather} />
-            {/* <Weather
-              temperature={this.state.temperature} 
-              humidity={this.state.humidity}
-              city={this.state.city}
-              country={this.state.country}
-              description={this.state.description}
-              error={this.state.error}
-              icon={this.state.icon}
-            /> */}
         </div>
       </div>
     );
